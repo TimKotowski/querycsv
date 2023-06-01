@@ -1,10 +1,8 @@
-name linter:
-
 on:
   push:
     branches: [master]
   pull_request:
-name: check
+
 jobs:
   fmt:
     runs-on: ubuntu-latest
