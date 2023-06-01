@@ -1,27 +1,22 @@
-name linter:
-
 on:
   push:
     branches: [master]
   pull_request:
 name: check
+
 jobs:
   fmt:
     runs-on: ubuntu-latest
     name: stable / fmt
     steps:
       - uses: actions/checkout@v3
-
-      - name: Install stable
-        uses: actions-rs/toolchain@v1
         with:
-          profile: minimal
-          toolchain: stable
+          submodules: true
+
+      - name: Install Stable
+        uses: dtolnay/rust-toolchain@stable
+        with:
           components: rustfmt
 
-      - name: Run cargo fmt
-      - uses: actions-rs/cargo@v1
-        continue-on-error: true
-        with:
-          command: fmt
-          args: --check
+      - name: rust fmt
+        run: cargo fmt --check
